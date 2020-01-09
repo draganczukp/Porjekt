@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Terrain
+  - Pickup
   layers:
   - Default
   - TransparentFX

@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
     // Player commands, stores wish commands that the player asks for (Forward, back, jump, etc)
     private Cmd _cmd;
 
+    public GameState GameState;
+
     private void Start()
     {
         // Hide the cursor
@@ -109,8 +111,8 @@ public class PlayerController : MonoBehaviour
         }
 
         /* Camera rotation stuff, mouse controls this shit */
-        rotX += Input.GetAxisRaw("Mouse Y") * xMouseSensitivity;
-        rotY += Input.GetAxisRaw("Mouse X") * yMouseSensitivity;
+        rotX += Input.GetAxisRaw("Mouse Y") * xMouseSensitivity * .2f;
+        rotY += Input.GetAxisRaw("Mouse X") * yMouseSensitivity * .2f;
 
         // Clamp the X rotation
         if (rotX < -90)
@@ -167,8 +169,11 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		print(other);
-	}
+        if (other.CompareTag("Pickup")){
+            GameState.OnPickupCollision(other.gameObject);
+        }
+
+    }
 
 
     /*******************************************************************************************************\
