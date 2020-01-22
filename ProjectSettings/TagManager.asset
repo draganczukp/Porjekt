@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - Pickup
+  - Start
   layers:
   - Default
   - TransparentFX
