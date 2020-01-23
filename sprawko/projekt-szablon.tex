@@ -1,0 +1,148 @@
+\documentclass[10pt,a4paper]{article}
+%\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{polski}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{hyperref}
+%\usepackage{antpolt}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{fancyvrb}
+
+\usepackage{color}
+
+%\setlength{\topskip}{0mm} \setlength{\footskip}{0mm} \setlength{\topmargin}{0mm} \setlength{\marginparwidth}{0mm}
+%\setlength{\headsep}{2mm} \setlength{\headheight}{0mm} \setlength{\textheight}{250mm}
+%\setlength{\textwidth}{160mm} \setlength{\oddsidemargin}{0mm} \setlength{\evensidemargin}{0mm}
+
+\setlength{\topskip}{0mm} \setlength{\topmargin}{0mm}
+\setlength{\oddsidemargin}{0mm} \setlength{\evensidemargin}{0mm}
+\setlength{\marginparwidth}{0mm} \setlength{\headsep}{0mm}
+\setlength{\headheight}{0mm} \setlength{\textheight}{240mm}
+\setlength{\textwidth}{170mm}
+
+
+\floatname{algorithm}{Algorytm}
+
+% \k{a} \'c \k{e} \l{} \'n \'o \'s
+% \'z \.z \k{A} \'C \k{E} \L{} \'N
+% \'O \'S \'Z \.Z 
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {Ã}{{\~A}}1 {ã}{{\~a}}1 {Õ}{{\~O}}1 {õ}{{\~o}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  {ł}{\l{}}1
+}
+
+\begin{document}
+\pagestyle{empty}
+
+%
+%  strona tytułowa
+%
+
+\begin{center}
+\textsc{\Huge{Uniwersytet Zielonogórski}}\\
+\LARGE{Wydział Informatyki, Elektrotechniki i~Automatyki}\\
+\large{Instytut Sterowania i Systemów Informatycznych}\\
+\vspace{0.5cm}
+\Large{Programowanie Gier 3D -- Projekt}\\
+Prowadzący: Dr inż. Marek Sawerwain \\ \vspace{1cm}
+\LARGE{Sprawozdanie z projektu}\\
+
+\vspace{0.5cm} 
+\Large{Wykonał: Przemysław Dragańczuk, Grupa dziekańska: 33-INF-SSI-SA} \\
+
+\Large{Data oddania projektu: 23.01.2019}
+\vspace{1cm}
+
+\begin{flushleft}
+	Ocena: ..........................................
+\end{flushleft}
+
+\vspace{1cm}
+\end{center}
+
+
+
+%
+% spis treści
+%
+
+\begin{multicols}{2}
+	\footnotesize
+	\tableofcontents
+\end{multicols}
+
+\noindent\makebox[\linewidth]{\rule{0.6\paperwidth}{0.4pt}}
+
+% \begin{flushleft}
+% 	\emph{Motto:}\\
+% 	\textit{Pisanie raportu przywilejem każdego studenta.}
+% \end{flushleft}
+
+
+% { \color{red}\bf 
+% \section*{Informacje o projekcie}
+
+
+% W przypadku realizacji projektu przez dwie osoby (lub więcej osób), każdy z wykonawców projektu oddaje własną kopię sprawozdania/raportu, gdzie w jednym w punktów wymagany jest szczegółowy opis zrealizowanych zadań.
+% }
+
+\section{Wprowadzenie} 
+\label{sec:wprowadzenie}
+
+Celem projektu jest stworzenie gry typu "Platformer" w przestrzeni 3D i z widokiem z pierwszej
+osoby
+
+% Opis sekcji. Wzór jeśli trzeba bez numeracji
+% \begin{displaymath}
+% C^{-1}(C(m))=m \hspace{1cm} oraz \hspace{1cm}  |C(m)|<|m| .
+% \end{displaymath}
+
+% Wzór jeśli trzeba z numeracją:
+% \begin{equation}
+% L_{ave}=P(m_{1})L(m_{1})+...+P(m_{n})L(m_{n}),
+% \end{equation}
+% gdzie $L(m_{i})=-\lg(P(m_{i}))$ natomiast $P(m_{i})$ oznacza prawdopodobieństwo wystąpienia $m_{i}$ symbolu. 
+
+
+% \begin{algorithm}
+% \caption{-- Algorytm tworzenia kodu Shannona-Fano} \label{SF_code_making}
+% \begin{algorithmic}
+% \STATE{uporządkować zbiór symboli S malejąco ze względu na prawdopodobieństwo ich występowania}
+% \STATE{$ShannonFano(S)$} \IF{$|S|=2$} \STATE{dopisz zero do kodu jednego elementu oraz jedynkę do drugiego kodu}
+% \ELSIF{$|S|>1$} \STATE{ podziel S na dwa podciągi $S_{1}$ i $S_{2}$ tak aby różnica prawdopodobieństw tych
+% podciągów była jak najmniejsza} \STATE{do każdego symbolu w $S_{1}$ dopisz zero a do każdego symbolu w $S_{2}$
+% dopisz jeden} \STATE{$SannonFano(S_{1})$} \STATE{$SannonFano(S_{2})$} \ENDIF
+% \end{algorithmic}
+% \end{algorithm}
+
+
+
+\section{Opis wkładu własnego w realizację projektu}
+
+\section{Spis zastosowanych zasobów}
+
+\section{Podsumowanie}
+
+
+\end{document}
