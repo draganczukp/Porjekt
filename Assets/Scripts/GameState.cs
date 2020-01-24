@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+
 
 public class GameState : MonoBehaviour
 {
 	public Text scoreText;
+    public Transform levelParent;
 
 	public GameObject currentLevel;
 	public List<GameObject> levels;
@@ -42,6 +45,15 @@ public class GameState : MonoBehaviour
 	{
 		oldPoints += points.Count;
 		Destroy(currentLevel);
-		currentLevel = Instantiate(levels[levelNumber++]);
+		currentLevel = Instantiate(levels[levelNumber++], levelParent);
+        currentLevel.SetActive(true);
 	}
+
+    public Transform GetStartPoint()
+    {
+        var transforms = from transform in currentLevel.GetComponentsInChildren<Transform>()
+                         where transform.gameObject.CompareTag("Start")
+                         select transform;
+        return transforms.First();
+    }
 }
