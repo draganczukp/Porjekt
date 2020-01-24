@@ -39,16 +39,6 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed = 8.0f;                // The speed at which the character's up axis gains when hitting jump
     public bool holdJumpToBhop = false;
 
-    /*print() style */
-    public GUIStyle style;
-
-    /*FPS Stuff */
-    public float fpsDisplayRate = 4.0f; // 4 updates per sec
-
-    private int frameCount = 0;
-    private float dt = 0.0f;
-    private float fps = 0.0f;
-
     private CharacterController _controller;
 
     // Camera rotations
@@ -65,17 +55,12 @@ public class PlayerController : MonoBehaviour
     // Used to display real time fricton values
     private float playerFriction = 0.0f;
 
-    // Player commands, stores wish commands that the player asks for (Forward, back, jump, etc)
     private Cmd _cmd;
 
     public GameState GameState;
 
     private void Start()
     {
-        // Hide the cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
         if (playerView == null)
         {
             Camera mainCamera = Camera.main;
@@ -96,22 +81,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Do FPS calculation
-        frameCount++;
-        dt += Time.deltaTime;
-        if (dt > 1.0 / fpsDisplayRate)
-        {
-            fps = Mathf.Round(frameCount / dt);
-            frameCount = 0;
-            dt -= 1.0f / fpsDisplayRate;
-        }
-        /* Ensure that the cursor is locked into the screen */
-        if (Cursor.lockState != CursorLockMode.Locked)
-        {
-            if (Input.GetButtonDown("Fire1"))
-                Cursor.lockState = CursorLockMode.Locked;
-        }
-
         /* Camera rotation stuff, mouse controls this shit */
         rotX += Input.GetAxisRaw("Mouse Y") * xMouseSensitivity * .2f;
         rotY += Input.GetAxisRaw("Mouse X") * yMouseSensitivity * .2f;
@@ -124,8 +93,6 @@ public class PlayerController : MonoBehaviour
 
         this.transform.rotation = Quaternion.Euler(0, rotY, 0); // Rotates the collider
         playerView.rotation = Quaternion.Euler(rotX, rotY, 0); // Rotates the camera
-
-
 
         /* Movement, here's the important part */
         QueueJump();
@@ -143,30 +110,16 @@ public class PlayerController : MonoBehaviour
         if (udp.magnitude > playerTopVelocity)
             playerTopVelocity = udp.magnitude;
 
-        //Need to move the camera after the player has been moved because otherwise the camera will clip the player if going fast enough and will always be 1 frame behind.
-        // Set the camera's position to the transform
         playerView.position = new Vector3(
                 transform.position.x,
                 transform.position.y + playerViewYOffset,
                 transform.position.z);
 
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-		    Application.Quit();
-#endif
-        }
 
         if (transform.position.y < -20)
         {
             transform.position = new Vector3(startPosition.position.x, startPosition.position.y, startPosition.position.z);
             playerVelocity = Vector3.zero;
-          //  _controller.Move(startPosition.position - _controller.transform.position);
-         //   _controller.
             GameState.OnPlayerDeath();
         }
     }
@@ -180,30 +133,18 @@ public class PlayerController : MonoBehaviour
         else if (other.CompareTag("Finish"))
         {
             GameState.OnNextLevel();
-
-
-            transform.position = GameState.GetStartPoint().position;
+            startPosition = GameState.GetStartPoint();
+            transform.position = startPosition.position;
         }
 
     }
 
-
-    /*******************************************************************************************************\
-	  |* MOVEMENT
-	  \*******************************************************************************************************/
-
-    /**
-	 * Sets the movement direction based on player input
-	 */
     private void SetMovementDir()
     {
         _cmd.forwardMove = Input.GetAxisRaw("Vertical");
         _cmd.rightMove = Input.GetAxisRaw("Horizontal");
     }
 
-    /**
-	 * Queues the next jump just like in Q3
-	 */
     private void QueueJump()
     {
         if (holdJumpToBhop)
