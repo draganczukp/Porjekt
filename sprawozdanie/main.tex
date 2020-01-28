@@ -44,13 +44,15 @@ Prowadzący: Dr inż. Marek Sawerwain \\ \vspace{1cm}
 \label{sec:wprowadzenie}
 
 Celem projektu jest stworzenie gry typu ``Platformer'' w przestrzeni 3D
-i z widokiem z pierwszej osoby.
+i z widokiem z pierwszej osoby. Sterowanie odbywa się za pomocą
+myszki i  klawiatury. Kamera sterowana jest używając myszki, a postacią sterują
+klawisze WASD oraz spacja.
 
 \begin{figure}[hb]
 	\centering
 	\includegraphics[height=6cm]{screens/lvl.png}
 	\label{fig:screen-lvl}
-	\caption{Widok perspektywy postaci}
+	\caption{Widok z perspektywy postaci}
 \end{figure}
 
 \subsection{Planowane funkcjonalności}
@@ -110,7 +112,7 @@ oznaczenia.
 \subsection{Skrypt kontrolujący ruch gracza}
 
 Poruszanie się gracza odbywa się za pomocą zmodyfikowanego skryptu, będącego
-portem kodu z gry Quake3\ref{sec:quake-movement}
+portem kodu z gry  (\ref{sec:quake-movement})
  Modyfikacje miały na celu usunięcie funkcjonalności nie używanej
 w tym projekcie, dodanie funkcjonalności takich jak prawidłowe ustawianie
 pozycji startowej, a także poprawę czytelności kodu.
@@ -127,7 +129,7 @@ również resetowana.
 W projekcie została użyta tekstura autorstwa użytkownika ``Spiney'' ze strony
 \href{https://opengameart.org}, a konkretnie tekstura i mapa normalnych
 ``mtl\textunderscore o''
-z \href{https://opengameart.org/content/metalstone-textures}{tej paczki}. Użyta
+z \href{https://opengameart.org/content/metalstone-textures}{tej paczki}\footnote{https://opengameart.org/content/metalstone-textures}. Użyta
 została jako tekstura platform na mapie.
 
 \begin{figure}[ht]
@@ -140,7 +142,8 @@ została jako tekstura platform na mapie.
 \subsection{Skrypt kontrolujący ruch gracza}\label{sec:quake-movement}
 
 Skrypt kontrolujący ruch gracza został pobrany z
-\href{https://github.com/WiggleWizard/quake3-movement-unity3d}{tego repozytorium}.
+\href{https://github.com/WiggleWizard/quake3-movement-unity3d}{tego repozytorium}
+\footnote{https://github.com/WiggleWizard/quake3-movement-unity3d}.
 Skrypt ten jest bezpośrednim portem systemu poruszania w grze Quake 3. Oryginalny
 kod z Quake 3 używa licencji GPL-2.0, zatem jego port również jej używa. Co za
 tym idzie, zmodyfikowany skrypt używany w tym projekcie także używa tej
